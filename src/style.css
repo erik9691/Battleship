@@ -12,3 +12,31 @@ a {
 button {
 	cursor: pointer;
 }
+header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 30px;
+	margin: 0.5em 0 1em 0;
+}
+
+.body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10%;
+}
+.gameboard {
+	width: 30%;
+	aspect-ratio: 1/1;
+	border: 1px solid black;
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+
+	.square {
+		border: 1px solid rgb(107, 107, 107);
+	}
+	.square.ship {
+		background-color: aqua;
+	}
+}

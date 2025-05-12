@@ -1,4 +1,4 @@
-export { Ship, Gameboard };
+export { Ship, Gameboard, Player };
 
 class Ship {
 	#hits = 0;
@@ -21,33 +21,37 @@ class Ship {
 }
 
 class Gameboard {
-	#ships = [];
+	ships = [];
+	missesReceived = [];
+	hitsReceived = [];
 	constructor() {}
-	placeShip(shipSize, position, isVertical) {
+	placeShip(shipSize, position, isVertical = true) {
 		if (position[1] - shipSize >= -1 && isVertical) {
 			const shipCoords = this.#calculateShipCoords(shipSize, position, isVertical);
-			this.#ships.push(new Ship(shipSize, shipCoords));
+			this.ships.push(new Ship(shipSize, shipCoords));
 			return true;
 		} else if (position[0] + shipSize <= 10 && !isVertical) {
 			const shipCoords = this.#calculateShipCoords(shipSize, position, isVertical);
-			this.#ships.push(new Ship(shipSize, shipCoords));
+			this.ships.push(new Ship(shipSize, shipCoords));
 			return true;
 		} else {
 			return false;
 		}
 	}
-	recieveAttack(attackPosition) {
-		for (let i = 0; i < this.#ships.length; i++) {
-			for (let u = 0; u < this.#ships[i].coords.length; u++) {
+	receiveAttack(attackPosition) {
+		for (let i = 0; i < this.ships.length; i++) {
+			for (let u = 0; u < this.ships[i].coords.length; u++) {
 				if (
-					this.#ships[i].coords[u][0] === attackPosition[0] &&
-					this.#ships[i].coords[u][1] === attackPosition[1]
+					this.ships[i].coords[u][0] === attackPosition[0] &&
+					this.ships[i].coords[u][1] === attackPosition[1]
 				) {
-					this.#ships[i].hit();
+					this.ships[i].hit();
+					this.hitsReceived.push(attackPosition);
 					return true;
 				}
 			}
 		}
+		this.missesReceived.push(attackPosition);
 		return false;
 	}
 	#calculateShipCoords(shipSize, position, isVertical) {
@@ -66,4 +70,14 @@ class Gameboard {
 		}
 		return shipCoords;
 	}
+}
+
+class Player {
+	constructor(computer = false) {
+		this.computer = computer;
+	}
+	sendAttack(opponent, attackPosition) {
+		opponent.board.receiveAttack(attackPosition);
+	}
+	board = new Gameboard();
 }

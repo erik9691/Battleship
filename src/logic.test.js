@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Ship, Gameboard } from "./battleship";
+import { Ship, Gameboard } from "./logic";
 
 test("ship sunk", () => {
 	const ship = new Ship(3);
@@ -35,10 +35,10 @@ test("place invalid horizontal ship", () => {
 test("hit ship", () => {
 	const board = new Gameboard();
 	board.placeShip(3, [0, 2], true);
-	expect(board.recieveAttack([0, 2])).toBe(true);
+	expect(board.receiveAttack([0, 2])).toBe(true);
 });
 test("not hit ship", () => {
 	const board = new Gameboard();
 	board.placeShip(3, [0, 2], true);
-	expect(board.recieveAttack([0, 3])).toBe(false);
+	expect(board.receiveAttack([0, 3])).toBe(false);
 });
