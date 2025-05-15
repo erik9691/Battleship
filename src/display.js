@@ -7,15 +7,11 @@ function createBoards() {
 		const playerSquare = document.createElement("div");
 		playerSquare.classList.add("square");
 		playerSquare.id = "p" + i;
-		const playerClickable = document.createElement("a");
-		playerSquare.appendChild(playerClickable);
 		playerBoard.appendChild(playerSquare);
 
 		const opponentSquare = document.createElement("div");
 		opponentSquare.classList.add("square");
 		opponentSquare.id = "o" + i;
-		const opponentClickable = document.createElement("a");
-		opponentSquare.appendChild(opponentClickable);
 		opponentBoard.appendChild(opponentSquare);
 	}
 }

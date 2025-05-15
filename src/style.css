@@ -35,12 +35,7 @@ header {
 
 	.square {
 		border: 1px solid rgb(107, 107, 107);
-
-		a {
-			display: block;
-			height: 100%;
-			width: 100%;
-		}
+		cursor: pointer;
 	}
 	.square.ship {
 		background-color: aqua;

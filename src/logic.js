@@ -77,7 +77,7 @@ class Player {
 		this.computer = computer;
 	}
 	sendAttack(opponent, attackPosition) {
-		opponent.board.receiveAttack(attackPosition);
+		return opponent.board.receiveAttack(attackPosition);
 	}
 	board = new Gameboard();
 }

@@ -1,6 +1,7 @@
 import "./style.css";
 import { createBoards, displayShips } from "./display";
 import { Player } from "./logic";
+import { addSquareListeners } from "./events";
 
 const player = new Player();
 const computer = new Player(true);
@@ -9,3 +10,4 @@ computer.board.placeShip(3, [2, 2], false);
 createBoards();
 displayShips(player);
 displayShips(computer);
+addSquareListeners(player, computer);
