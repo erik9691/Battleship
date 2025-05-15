@@ -7,17 +7,29 @@ function createBoards() {
 		const playerSquare = document.createElement("div");
 		playerSquare.classList.add("square");
 		playerSquare.id = "p" + i;
+		const playerClickable = document.createElement("a");
+		playerSquare.appendChild(playerClickable);
 		playerBoard.appendChild(playerSquare);
+
 		const opponentSquare = document.createElement("div");
 		opponentSquare.classList.add("square");
+		opponentSquare.id = "o" + i;
+		const opponentClickable = document.createElement("a");
+		opponentSquare.appendChild(opponentClickable);
 		opponentBoard.appendChild(opponentSquare);
 	}
 }
 
-function displayShips(board) {
+function displayShips(player) {
+	const board = player.board;
 	for (let i = 0; i < board.ships.length; i++) {
 		for (let u = 0; u < board.ships[i].coords.length; u++) {
-			const id = "p" + positionToId(board.ships[i].coords[u]);
+			let id;
+			if (player.computer) {
+				id = "o" + positionToId(board.ships[i].coords[u]);
+			} else {
+				id = "p" + positionToId(board.ships[i].coords[u]);
+			}
 			const shipSquare = document.getElementById(id);
 			shipSquare.classList.add("ship");
 		}

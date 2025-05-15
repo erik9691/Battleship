@@ -3,6 +3,9 @@ import { createBoards, displayShips } from "./display";
 import { Player } from "./logic";
 
 const player = new Player();
+const computer = new Player(true);
 player.board.placeShip(3, [5, 5]);
+computer.board.placeShip(3, [2, 2], false);
 createBoards();
-displayShips(player.board);
+displayShips(player);
+displayShips(computer);
