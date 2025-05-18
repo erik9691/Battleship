@@ -26,24 +26,19 @@ header {
 	align-items: center;
 	gap: 3%;
 }
-.gametext {
+.turn {
+	text-align: center;
 	width: 10%;
+	font-size: 30px;
+	margin-bottom: 3em;
+}
+.message {
+	margin-top: 1rem;
 	text-align: center;
 	font-size: 30px;
-	display: flex;
-	flex-direction: column;
-	align-self: flex-start;
-	height: 25vw;
-	.turn {
-	}
-	.message {
-		margin-top: auto;
-		margin-bottom: auto;
-	}
 }
-
 .gameboard {
-	width: 30%;
+	width: 30vw;
 	aspect-ratio: 1/1;
 	border: 1px solid black;
 	display: grid;

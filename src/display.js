@@ -52,7 +52,12 @@ function updateTurnMessage(messageText) {
 	messageDiv.innerText = messageText;
 }
 
-function updateActionMessage(messageText) {
-	const messageDiv = document.querySelector(".message");
+function updateActionMessage(messageText, message1) {
+	let messageDiv;
+	if (message1 === 1) {
+		messageDiv = document.getElementById("message1");
+	} else {
+		messageDiv = document.getElementById("message2");
+	}
 	messageDiv.innerText = messageText;
 }
