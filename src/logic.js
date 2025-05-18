@@ -39,6 +39,32 @@ class Gameboard {
 		}
 	}
 	receiveAttack(attackPosition) {
+		const returnObject = {
+			valid: true,
+			hit: false,
+			sunk: false,
+			won: false,
+		};
+
+		this.hitsReceived.forEach((hitReceived) => {
+			if (attackPosition[0] === hitReceived[0] && attackPosition[1] === hitReceived[1]) {
+				returnObject.valid = false;
+			}
+		});
+		if (returnObject.valid === true) {
+			this.missesReceived.forEach((missReceived) => {
+				if (
+					attackPosition[0] === missReceived[0] &&
+					attackPosition[1] === missReceived[1]
+				) {
+					returnObject.valid = false;
+				}
+			});
+		}
+		if (returnObject.valid === false) {
+			return returnObject;
+		}
+
 		for (let i = 0; i < this.ships.length; i++) {
 			for (let u = 0; u < this.ships[i].coords.length; u++) {
 				if (
@@ -47,12 +73,23 @@ class Gameboard {
 				) {
 					this.ships[i].hit();
 					this.hitsReceived.push(attackPosition);
-					return true;
+					returnObject.hit = true;
+					if (this.ships[i].isSunk()) {
+						returnObject.sunk = true;
+						returnObject.won = true;
+						this.ships.forEach((ship) => {
+							if (!ship.isSunk()) {
+								returnObject.won = false;
+								return;
+							}
+						});
+					}
 				}
 			}
 		}
+
 		this.missesReceived.push(attackPosition);
-		return false;
+		return returnObject;
 	}
 	#calculateShipCoords(shipSize, position, isVertical) {
 		const shipCoords = [];
