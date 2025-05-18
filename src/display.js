@@ -1,4 +1,10 @@
-export { createBoards, displayShips };
+export { createBoards, displayShips, updateSquare };
+
+function positionToId(position) {
+	let id = -1;
+	id += position[0] + 1 + 10 * position[1];
+	return id;
+}
 
 function createBoards() {
 	const playerBoard = document.getElementById("player");
@@ -32,8 +38,11 @@ function displayShips(player) {
 	}
 }
 
-function positionToId(position) {
-	let id = -1;
-	id += position[0] + 1 + 10 * position[1];
-	return id;
+function updateSquare(squareId, hit = false) {
+	const square = document.getElementById(squareId);
+	if (hit) {
+		square.classList.add("hit");
+	} else {
+		square.classList.add("miss");
+	}
 }

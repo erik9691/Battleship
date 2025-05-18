@@ -40,4 +40,10 @@ header {
 	.square.ship {
 		background-color: aqua;
 	}
+	.square.hit {
+		background-color: red;
+	}
+	.square.miss {
+		background-color: gray;
+	}
 }
