@@ -1,4 +1,4 @@
-export { createBoards, displayShips, updateSquare };
+export { createBoards, displayShips, updateSquare, updateTurnMessage, updateActionMessage };
 
 function positionToId(position) {
 	let id = -1;
@@ -45,4 +45,14 @@ function updateSquare(squareId, hit = false) {
 	} else {
 		square.classList.add("miss");
 	}
+}
+
+function updateTurnMessage(messageText) {
+	const messageDiv = document.querySelector(".turn");
+	messageDiv.innerText = messageText;
+}
+
+function updateActionMessage(messageText) {
+	const messageDiv = document.querySelector(".message");
+	messageDiv.innerText = messageText;
 }
