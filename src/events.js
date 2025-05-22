@@ -1,5 +1,5 @@
 export { addSquareListeners };
-import { updateSquare, updateTurnMessage, updateActionMessage } from "./display";
+import { updateSquare, updateTurnMessage, updateActionMessage, positionToId } from "./display";
 
 let playerTurn = true;
 let playerHandler;
@@ -67,14 +67,24 @@ function processAttack(square, attacker, receiver) {
 	const attackRes = attacker.sendAttack(receiver, attackPos);
 	if (attackRes.valid) {
 		if (attackRes.hit) {
-			updateSquare(square.id, true);
+			updateSquare(square.id, "hit");
 			updateActionMessage("Hit!", messageLocation);
 		} else {
-			updateSquare(square.id);
+			updateSquare(square.id, "miss");
 			updateActionMessage("Miss!", messageLocation);
 		}
 		if (attackRes.sunk) {
 			updateActionMessage("Sunk!", messageLocation);
+			receiver.board.ships.forEach((ship) => {
+				if (ship.isSunk()) {
+					ship.coords.forEach((coord) => {
+						let id = square.id.charAt(0);
+						id += positionToId(coord);
+						updateSquare(id, "sunk");
+					});
+					console.log(ship.coords);
+				}
+			});
 		}
 		if (attackRes.won) {
 			removeSquareListeners();

@@ -1,4 +1,11 @@
-export { createBoards, displayShips, updateSquare, updateTurnMessage, updateActionMessage };
+export {
+	createBoards,
+	displayShips,
+	updateSquare,
+	updateTurnMessage,
+	updateActionMessage,
+	positionToId,
+};
 
 function positionToId(position) {
 	let id = -1;
@@ -38,12 +45,15 @@ function displayShips(player) {
 	}
 }
 
-function updateSquare(squareId, hit = false) {
+function updateSquare(squareId, status) {
 	const square = document.getElementById(squareId);
-	if (hit) {
+	if (status === "hit") {
 		square.classList.add("hit");
-	} else {
+	} else if (status === "miss") {
 		square.classList.add("miss");
+	} else {
+		square.classList.remove("hit");
+		square.classList.add("sunk");
 	}
 }
 
