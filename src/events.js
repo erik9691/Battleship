@@ -1,9 +1,30 @@
-export { addSquareListeners };
+export { addSquareListeners, addModalListener };
 import { updateSquare, updateTurnMessage, updateActionMessage, positionToId } from "./display";
 
 let playerTurn = true;
 let playerHandler;
 let opponentHandler;
+
+function addModalListener() {
+	return new Promise((resolve) => {
+		const startModal = document.querySelector(".start-modal");
+		startModal.showModal();
+		const submitBtn = startModal.querySelector('button[type="submit"]');
+		submitBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			const p1NameInput = startModal.querySelector('input[name="p1Name"]');
+			const p2NameInput = startModal.querySelector('input[name="p2Name"]');
+			const p2AICheckbox = startModal.querySelector('input[name="p2AI"]');
+			startModal.close();
+
+			resolve({
+				p1Name: p1NameInput.value || "Player 1",
+				p2Name: p2NameInput.value || "Player 2",
+				p2AI: p2AICheckbox.checked,
+			});
+		});
+	});
+}
 
 function handleBoardClick(attacker, receiver) {
 	return function (e) {

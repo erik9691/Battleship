@@ -5,12 +5,18 @@ export {
 	updateTurnMessage,
 	updateActionMessage,
 	positionToId,
+	setNames,
 };
 
 function positionToId(position) {
 	let id = -1;
 	id += position[0] + 1 + 10 * position[1];
 	return id;
+}
+
+function setNames(player1Name, player2Name) {
+	document.getElementById("playerName").innerText = player1Name;
+	document.getElementById("opponentName").innerText = player2Name;
 }
 
 function createBoards() {
