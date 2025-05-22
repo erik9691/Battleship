@@ -110,8 +110,9 @@ class Gameboard {
 }
 
 class Player {
-	constructor(name = "Player", computer = false) {
+	constructor(name = "Player", p2, computer = false) {
 		this.name = name;
+		this.p2 = p2;
 		this.computer = computer;
 	}
 	sendAttack(opponent, attackPosition) {

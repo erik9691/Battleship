@@ -28,7 +28,7 @@ function addModalListener() {
 
 function handleBoardClick(attacker, receiver) {
 	return function (e) {
-		if (attacker.computer) {
+		if (attacker.p2) {
 			if (playerTurn) {
 				updateActionMessage("Can't attack yourself!", 1);
 			} else {
@@ -78,7 +78,7 @@ function computerAttack(attacker, receiver) {
 
 function processAttack(square, attacker, receiver) {
 	let messageLocation;
-	if (receiver.computer) {
+	if (receiver.p2) {
 		messageLocation = 2;
 	} else {
 		messageLocation = 1;

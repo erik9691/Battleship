@@ -40,7 +40,7 @@ function displayShips(player) {
 	for (let i = 0; i < board.ships.length; i++) {
 		for (let u = 0; u < board.ships[i].coords.length; u++) {
 			let id;
-			if (player.computer) {
+			if (player.p2) {
 				id = "o" + positionToId(board.ships[i].coords[u]);
 			} else {
 				id = "p" + positionToId(board.ships[i].coords[u]);
